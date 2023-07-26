@@ -18,3 +18,7 @@ entrees_options <- 6
 drinks_options <- 2
 
 meal_combinations <- choose(entrees_options, 1) * choose(sides_options, 2) * choose(drinks_options, 1)
+
+#How many combinations are possible if he expands his original special to 3 drink options?
+drinks_options <- 3
+meal_combinations_2 <- choose(entrees_options, 1) * choose(sides_options, 2) * choose(drinks_options, 1)
