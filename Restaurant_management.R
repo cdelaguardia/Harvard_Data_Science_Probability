@@ -83,5 +83,5 @@ meal_combinations_function_2 <- function(sides_options){
 
 #Use sapply() to apply the function to side counts ranging from 2 to 12.
 
-sides_options_seq <- seq(1, 12)
+sides_options_seq <- seq(2, 12)
 sapply(sides_options_seq, meal_combinations_function_2)
