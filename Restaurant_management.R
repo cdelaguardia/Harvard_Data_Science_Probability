@@ -51,7 +51,6 @@ meal_combinations_3 <- choose(entrees_options, entrees_choices) * choose(sides_o
 
 meal_combinations_function <- function(entrees_options){
   sides_options <- 6
-  #entrees_options <- 6
   drinks_options <- 3
   
   sides_choices <- 2
@@ -67,3 +66,22 @@ meal_combinations_function <- function(entrees_options){
 entrees_options_seq <- seq(1, 12)
 sapply(entrees_options_seq, meal_combinations_function)
 
+#Write a function that takes a number of side choices and returns the 
+#number of meal combinations possible given 6 entree choices, 3 drink choices, 
+#and a selection of 2 sides from the specified number of side choices.
+
+meal_combinations_function_2 <- function(sides_options){
+  entree_options <- 6
+  drinks_options <- 3
+  
+  sides_choices <- 2
+  entrees_choices <- 1
+  drinks_choices <- 1
+  
+  choose(entrees_options, entrees_choices) * choose(sides_options, sides_choices) * choose(drinks_options, drinks_choices)
+}
+
+#Use sapply() to apply the function to side counts ranging from 2 to 12.
+
+sides_options_seq <- seq(1, 12)
+sapply(sides_options_seq, meal_combinations_function_2)
