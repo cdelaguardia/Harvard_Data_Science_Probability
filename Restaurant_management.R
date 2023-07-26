@@ -17,4 +17,4 @@ sides_options <- 6
 entrees_options <- 6
 drinks_options <- 2
 
-meal_combinations <- choose(entrees_options, 1) * choose(sides_options, 2) * choose(drinks_options, 1)
+meal_combinations <- choose(entrees_options, 1) * choose(sides_options, 2) * choose(drinks_options,1)
