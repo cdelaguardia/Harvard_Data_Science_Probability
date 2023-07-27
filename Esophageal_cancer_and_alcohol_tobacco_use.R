@@ -18,3 +18,15 @@ all_cases <- sum(esoph$ncases)
 #How many controls are there?
 
 all_controls <- sum(esoph$ncontrols)
+
+#What is the probability that a subject in the highest alcohol 
+#consumption group is a cancer case?
+
+highest_alc <- esoph %>% group_by(alcgp) %>% 
+    summarise(sum_cases = sum(ncases), sum_controls = sum(ncontrols) ) %>% 
+    filter(alcgp == "120+")
+Pr_highest_alc_case = highest_alc$sum_cases/(highest_alc$sum_cases + highest_alc$sum_controls)
+
+
+
+
