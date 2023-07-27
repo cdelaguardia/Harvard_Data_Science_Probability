@@ -40,13 +40,17 @@ Pr_lowest_alc_case = lowest_alc$sum_cases/(lowest_alc$sum_cases + lowest_alc$sum
 #What is the probability that a subject in the lowest alcohol consumption group 
 #is a cancer case?
 
-smoke_10g <- esoph %>% group_by(tobgp) %>% 
-  summarise(sum_cases = sum(ncases), sum_controls = sum(ncontrols) ) %>% 
+cases_smoke_10g <- esoph %>% group_by(tobgp) %>% 
+  summarise(sum_cases = sum(ncases)) %>% 
   filter(tobgp != "0-9g/day")
 
-sum(smoke_10g$sum_cases)/all_cases
+sum(cases_smoke_10g$sum_cases)/all_cases
 
+#Given that a person is a control, what is the probability that they smoke 
+#10g or more a day?
+controls_smoke_10g <- esoph %>% group_by(tobgp) %>% 
+  summarise(sum_controls = sum(ncontrols)) %>% 
+  filter(tobgp != "0-9g/day")
 
-
-
+sum(controls_smoke_10g$sum_controls)/all_controls
                                
