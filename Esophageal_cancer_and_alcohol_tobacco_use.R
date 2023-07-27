@@ -54,4 +54,16 @@ cases_highest_alc <- esoph %>% group_by(alcgp) %>%
 
 Pr_case_highest_alc <- cases_highest_alc$sum_cases/all_cases
 
-                               
+#For cases, what is the probability of being in the highest tobacco group?
+cases_highest_tobac <- esoph %>% group_by(tobgp) %>% 
+  summarise(sum_cases = sum(ncases)) %>% 
+  filter(tobgp == "30+")
+
+Pr_case_highest_tobac <- cases_highest_tobac$sum_cases/all_cases
+
+#For cases, what is the probability of being in the highest alcohol group and 
+#the highest tobacco group?
+
+cases_highest_alc_tobac <- esoph %>% filter(alcgp == "120+" & tobgp == "30+") %>% summarise(sum_cases = sum(ncases))
+
+Pr_cases_highest_alc_tobac <- cases_highest_alc_tobac/all_cases                             
