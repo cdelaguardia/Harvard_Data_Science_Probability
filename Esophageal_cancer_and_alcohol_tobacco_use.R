@@ -73,3 +73,41 @@ Pr_cases_highest_alc_tobac <- cases_highest_alc_tobac/all_cases
 cases_highest_alc_tobac_or <- esoph %>% filter(alcgp == "120+" | tobgp == "30+") %>% summarise(sum_cases = sum(ncases))
 
 Pr_cases_highest_alc_tobac_or <- cases_highest_alc_tobac_or/all_cases
+
+#For controls, what is the probability of being in the highest alcohol group?
+
+controls_highest_alc <- esoph %>% group_by(alcgp) %>% 
+  summarise(sum_controls = sum(ncontrols)) %>% 
+  filter(alcgp == "120+")
+
+Pr_control_highest_alc <- controls_highest_alc$sum_controls/all_controls
+
+#How many times more likely are cases than controls to be in the highest 
+#alcohol group?
+Pr_case_highest_alc/Pr_control_highest_alc
+
+#For controls, what is the probability of being in the highest tobacco group?
+controls_highest_tobac <- esoph %>% group_by(tobgp) %>% 
+  summarise(sum_controls = sum(ncontrols)) %>% 
+  filter(tobgp == "30+")
+
+Pr_control_highest_tobac <- controls_highest_tobac$sum_controls/all_controls
+
+#For controls, what is the probability of being in the highest alcohol group 
+#and the highest tobacco group?
+
+controls_highest_alc_tobac <- esoph %>% filter(alcgp == "120+" & tobgp == "30+") %>% summarise(sum_controls = sum(ncontrols))
+
+Pr_controls_highest_alc_tobac <- controls_highest_alc_tobac/all_controls
+
+#For controls, what is the probability of being in the highest alcohol group 
+#or the highest tobacco group?
+
+controls_highest_alc_tobac_or <- esoph %>% filter(alcgp == "120+" | tobgp == "30+") %>% summarise(sum_controls = sum(ncontrols))
+
+Pr_controls_highest_alc_tobac_or <- controls_highest_alc_tobac_or/all_controls
+
+#How many times more likely are cases than controls to be in the highest 
+#alcohol group or the highest tobacco group?
+
+Pr_cases_highest_alc_tobac_or/Pr_controls_highest_alc_tobac_or
