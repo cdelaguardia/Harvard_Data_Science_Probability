@@ -49,5 +49,30 @@ p_guessing_8_higher <- replicate(B, {
 
 mean(p_guessing_8_higher >= 8)
 
+#The SAT was recently changed to reduce the number of multiple choice options 
+#from 5 to 4 and also to eliminate the penalty for guessing.
+
+#In this two-part question, you'll explore how that affected the expected 
+#values for the test.
+p_correct_2 = 1/4
+
+#What is the expected value of the score when guessing on this new test?
+expected_gessing_2 <- (1 * p_correct_2 + (0 * (1 - p_correct_2)))*44
+
+#Consider a range of correct answer probabilities p <- seq(0.25, 0.95, 0.05) 
+#representing a range of student skills.
+p <- seq(0.25, 0.95, 0.05)
+
+#What is the lowest p such that the probability of scoring over 35 exceeds 80%?
+
+values <- function(x) {
+  expected <- n * 1 * x + 0 * (1 - x)
+  standard_error_2 <- sqrt(n) * abs(0 - 1) * sqrt(x * (1 - x))
+  1 - pnorm(35, expected, standard_error_2)
+}
+
+values_vect <- sapply(p, values)
+
+min(p[which(values_vect > 0.8)])
 
 
