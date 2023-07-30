@@ -34,3 +34,64 @@ f_x <- dnorm(x, 20.9, 5.7)
 
 data.frame(x, f_x) %>% ggplot(aes(x, f_x)) + 
   geom_line()
+
+#What is the probability of a Z-score greater than 2 
+z_scores <- (act_scores - act_mean) / act_sd
+
+mean(z_scores > 2)
+
+#What ACT score value corresponds to 2 standard deviations 
+#above the mean (Z = 2)?
+act_sd * 2 + act_mean
+
+#What is the 97.5th percentile of act_scores?
+qnorm(0.975, act_mean, act_sd)
+
+#Write a function that takes a value and produces the probability 
+#of an ACT score less than or equal to that value (the CDF)
+#Apply this function to the range 1 to 36 
+
+act_cdf <- function(n){
+  mean(act_scores <= n)
+}
+
+act_cdf <- sapply(x, act_cdf)
+
+#What is the minimum integer score such that the probability of that 
+#score or lower is at least .95?
+
+min(which(act_cdf >= 0.95))
+
+#Use qnorm() to determine the expected 95th percentile, the value for 
+#which the probability of receiving that score or lower is 0.95, given a 
+#mean score of 20.9 and standard deviation of 5.7.
+
+#What is the expected 95th percentile of ACT scores?
+
+qnorm(0.95, 20.9, 5.7)
+
+#Make a vector containing the quantiles for p <- seq(0.01, 0.99, 0.01), 
+#the 1st through 99th percentiles of the act_scores data. Save these as 
+#sample_quantiles.
+p <- seq(0.01, 0.99, 0.01)
+act_scores <- rnorm(10000, 20.9, 5.7)
+sample_quantiles <- quantile(act_scores, p)
+
+#In what percentile is a score of 26?
+
+sample_quantiles[max(which(sample_quantiles < 26))]
+
+#Make a corresponding set of theoretical quantiles using qnorm() over the 
+#interval p <- seq(0.01, 0.99, 0.01) with mean 20.9 and standard 
+#deviation 5.7. Save these as theoretical_quantiles.
+p <- seq(0.01, 0.99, 0.01)
+sample_quantiles <- quantile(act_scores, p)
+theoretical_quantiles <- qnorm(p, 20.9, 5.7)
+
+#Make a QQ-plot graphing sample_quantiles on the y-axis versus 
+#theoretical_quantiles on the x-axis.
+qplot(theoretical_quantiles, sample_quantiles) + geom_abline()
+
+
+
+
